@@ -5,7 +5,6 @@
 	use Illuminate\Auth\Events\PasswordReset;
 	use Illuminate\Support\Facades\Hash;
 	use Illuminate\Support\Facades\Password;
-	use Illuminate\Support\Facades\Session;
 	use Illuminate\Support\Str;
 	use Illuminate\Validation\Rules;
 	use Livewire\Attributes\Layout;
@@ -19,6 +18,8 @@
 		public string $token    = '';
 		public string $email    = '';
 		public string $password = '';
+		
+		public $resetSuccess = false;
 		
 		/**
 		 * Mount the component.
@@ -54,18 +55,15 @@
 				}
 			);
 			
-			// If the password was successfully reset, we will redirect the user back to
-			// the application's home authenticated view. If there is an error we can
-			// redirect them back to where they came from with their error message.
-			if($status != Password::PasswordReset){
-				$this->addError('email',__($status));
-				
+			// Check if the status indicates an invalid or expired token
+			if($status === Password::INVALID_TOKEN){
+				$this->addError('password',__('The reset password token is invalid or expired. Please request a new one.'));
 				return;
 			}
 			
-			Session::flash('status',__($status));
+			// Cambiar el estado para mostrar el mensaje de éxito
+			$this->resetSuccess = true;
 			
-			$this->redirectRoute('login',navigate:true);
 		}
 		
 		public function render(){

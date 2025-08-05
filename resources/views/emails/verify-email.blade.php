@@ -127,12 +127,11 @@
 																	<td class="m_-3817729632099721155bg-rollover" align="center" role="presentation"
 																		style="border-radius:8px;color:#ffffff;font-size:16px;width:100%;border-collapse:collapse;border-style:none" valign="middle"
 																		bgcolor="#545BFE">
-																		<a class="m_-3817729632099721155bg-rollover" href="https://app.ynab.com/users/confirmation?confirmation_token=rkPdsXUQbNbfeugB3oJ8"
+																		<a class="m_-3817729632099721155bg-rollover" href="{{ $verificationUrl }}"
 																			name="m_-3817729632099721155_mj-column"
 																			style="display:inline-block;color:#ffffff;font-family:'Figtree',Helvetica,Google Sans,sans-serif;font-size:16px;font-weight:700;line-height:19px;letter-spacing:0px;text-decoration:none;text-transform:none;border-radius:8px;width:100%;margin:0;padding:14px 0px"
 																			target="_blank"
-																			data-saferedirecturl="https://www.google.com/url?q=https://app.ynab.com/users/confirmation?confirmation_token%3DrkPdsXUQbNbfeugB3oJ8&amp;source=gmail&amp;ust=1754180858813000&amp;usg=AOvVaw2j63AupxcvqHU1ZWp6JuXj">Confirm
-																			Your Email</a>
+																			data-saferedirecturl="#">Confirm Your Email</a>
 																	</td>
 																</tr>
 																</tbody>

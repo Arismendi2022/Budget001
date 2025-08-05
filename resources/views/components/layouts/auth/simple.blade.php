@@ -11,7 +11,6 @@
 	{{-- Token --}}
 	<meta name="csrf-param" content="authenticity_token">
 	<meta name="csrf-token" content="{{ csrf_token() }}">
-	<meta name="session-token">
 	{{-- Styles --}}
 	<link href="{{ asset('assets/css/auth.css') }}" rel="stylesheet" type="text/css">
 	<link href="{{ asset('assets/favicon/Tree_Logo_Blurple.png') }}" rel="shortcut icon" type="image/x-icon">

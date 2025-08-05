@@ -2,49 +2,63 @@
 	
 	namespace App\Notifications;
 	
-	use Illuminate\Bus\Queueable;
-	use Illuminate\Notifications\Messages\MailMessage;
-	use Illuminate\Notifications\Notification;
 	use App\Helpers\CMail;
+	use Illuminate\Bus\Queueable;
+	use Illuminate\Notifications\Notification;
+	use Illuminate\Support\Carbon;
+	use Illuminate\Support\Facades\URL;
 	
 	class CustomVerifyEmail extends Notification
 	{
 		use Queueable;
 		
 		/**
-		 * Create a new notification instance.
-		 */
-		public function __construct(){
-			//
-		}
-		
-		/**
 		 * Get the notification's delivery channels.
-		 *
-		 * @return array<int, string>
 		 */
-		public function via(object $notifiable):array{
-			return ['mail'];
+		public function via($notifiable){
+			return []; // Empty array to avoid using Laravel channels
 		}
 		
 		/**
-		 * Get the mail representation of the notification.
+		 * Override the send method to use CMail directly
 		 */
-		public function toMail(object $notifiable):MailMessage{
-			return (new MailMessage)
-				->line('The introduction to the notification.')
-				->action('Notification Action',url('/'))
-				->line('Thank you for using our application!');
+		public function send($notifiable,$notification){
+			return $this->sendViaCMail($notifiable);
 		}
 		
 		/**
-		 * Get the array representation of the notification.
-		 *
-		 * @return array<string, mixed>
+		 * Send email using CMail helper
 		 */
-		public function toArray(object $notifiable):array{
-			return [
-				//
+		public function sendViaCMail($notifiable){
+			$verificationUrl = $this->verificationUrl($notifiable);
+			
+			// Render the email view
+			$emailBody = view('emails.verify-email',[
+				'verificationUrl' => $verificationUrl,
+				'user'            => $notifiable,
+			])->render();
+			
+			$config = [
+				'recipient_address' => $notifiable->email,
+				'recipient_name'    => $notifiable->name,
+				'subject'           => 'Verify Email Address - '.config('app.name'),
+				'body'              => $emailBody,
 			];
+			
+			return CMail::send($config);
+		}
+		
+		/**
+		 * Get the verification URL for the given notifiable.
+		 */
+		protected function verificationUrl($notifiable){
+			return URL::temporarySignedRoute(
+				'verification.verify',
+				Carbon::now()->addMinutes(60),
+				['id' => $notifiable->getKey(),'hash' => sha1($notifiable->getEmailForVerification())]
+			);
 		}
 	}
+	
+	
+	

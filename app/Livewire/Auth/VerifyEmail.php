@@ -38,7 +38,11 @@
 		}
 		
 		public function render(){
-			view()->share('isDark',$this->isDark);
-			return view('livewire.auth.verify-email');
+			view()->share([
+				'dataPage'    => 'authentications#verify',
+				'bodyClasses' => 'theme-light',
+			]);
+			return view('livewire.auth.verify-email')->title('YNAB | Verify Email');
 		}
+		
 	}

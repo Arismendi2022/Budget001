@@ -109,7 +109,7 @@
 																	<td class="m_-569573937723479330bg-rollover" align="center" role="presentation"
 																		style="border-radius:8px;color:#ffffff;font-size:16px;width:100%;border-collapse:collapse;border-style:none" valign="middle"
 																		bgcolor="#545BFE">
-																		<a class="m_-569573937723479330bg-rollover" href="{{ $actionlink }}"
+																		<a class="m_-569573937723479330bg-rollover" href="{{ $url }}"
 																			name="m_-569573937723479330_mj-column"
 																			style="display:inline-block;color:#ffffff;font-family:'Figtree',Helvetica,Google Sans,sans-serif;font-size:16px;font-weight:700;line-height:19px;letter-spacing:0px;text-decoration:none;text-transform:none;border-radius:8px;width:100%;margin:0;padding:14px 0px"
 																			target="_blank"

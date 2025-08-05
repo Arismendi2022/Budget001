@@ -37,16 +37,15 @@
 		 * Send email using CMail helper
 		 */
 		public function sendViaCMail($notifiable){
-			$actionlink = url(route('password.reset',[
+			$url = url(route('password.reset',[
 				'token' => $this->token,
 				'email' => $notifiable->getEmailForPasswordReset(),
 			],false));
 			
 			$emailBody = view('emails.reset-password',[
-				'url'        => $actionlink,
-				'actionlink' => $actionlink,
-				'user'       => $notifiable,
-				'app_name'   => config('app.name'),
+				'url'      => $url,
+				'user'     => $notifiable,
+				'app_name' => config('app.name'),
 			])->render();
 			
 			$config = [

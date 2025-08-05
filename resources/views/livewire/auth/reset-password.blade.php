@@ -17,7 +17,7 @@
 	</noscript>
 	<main role="main" class="page-main">
 		<div data-controller="edit-passwords" data-edit-passwords-otp-form-outlet="#otp-form">
-			<div class="passwords-container" data-edit-passwords-target="resetPasswordContainer">
+			<div class="passwords-container" data-edit-passwords-target="resetPasswordContainer" {{ $resetSuccess ? 'hidden' : '' }}>
 				<div class="js-main_screen_or_otp_app_or_otp_backup_code">
 					<h2>Reset your password</h2>
 					<form class="form js-form" data-edit-passwords-target="resetForm"
@@ -55,18 +55,18 @@
 									<a href="#" data-action="click-&gt;otp-form#showBackup">I'm having trouble</a>
 								</p>
 								<p data-otp-form-target="troubleshootLink" hidden="">
-									<a rel="noopener noreferrer" target="_blank" href="https://support.ynab.com/en_us/how-to-protect-your-account-with-two-step-verification-rkKHuLlRc#troubleshoot">I
+									<a rel="noopener noreferrer" target="_blank" href="#">I
 										don't have my backup code</a>
 								</p>
 							</div>
 						</div>
 					</form>
 					<p>
-						<a href="{{ route('login') }}">Return to log in</a>
+						<a href="{{ route('login') }}" wire:navigate>Return to log in</a>
 					</p>
 				</div>
 			</div>
-			<div data-edit-passwords-target="resetSuccessContainer" hidden="">
+			<div data-edit-passwords-target="resetSuccessContainer" {{ !$resetSuccess ? 'hidden' : '' }} >
 				<div data-edit-passwords-target="resetAndDisabledContainer" hidden="">
 					<h2>We've reset your password and disabled Two-Step Verification</h2>
 					<p>For your security, logging in with a single-use emergency backup code disables two-step verification. <br>
@@ -81,13 +81,13 @@
 						</p>
 					</div>
 				</div>
-				<div data-edit-passwords-target="nonOTPSuccessContainer" hidden="">
+				<div data-edit-passwords-target="nonOTPSuccessContainer" {{ !$resetSuccess ? 'hidden' : '' }}>
 					<h2>Your password has been reset.</h2>
 					<p>
 						You can now log in and make further edits in account settings.
 					</p>
 					<p>
-						<a class="button button-launch-app launch_app_button" id="launch_app_button" href="{{ route('login') }}">Log In</a>
+						<a class="button button-launch-app launch_app_button" id="launch_app_button" href="{{ route('login') }}" wire:navigate>Log In</a>
 					</p>
 				
 				</div>

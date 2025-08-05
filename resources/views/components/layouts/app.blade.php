@@ -11,7 +11,6 @@
 	{{-- Token --}}
 	<meta name="csrf-param" content="authenticity_token">
 	<meta name="csrf-token" content="{{ csrf_token() }}">
-	<meta name="session-token">
 	
 	<title>{{ $title ?? 'Page Title Budget' }}</title>
 	{{-- Styles --}}
