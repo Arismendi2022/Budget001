@@ -11,7 +11,11 @@
 	#[Layout('components.layouts.auth')]
 	class VerifyEmail extends Component
 	{
-		public bool $isDark = false;
+		public string $email;
+		
+		public function mount(){
+			$this->email = Auth::user()->email;
+		}
 		
 		/**
 		 * Send an email verification notification to the user.
@@ -39,7 +43,7 @@
 		
 		public function render(){
 			view()->share([
-				'dataPage'    => 'authentications#verify',
+				'dataPage'    => 'confirmations#show',
 				'bodyClasses' => 'theme-light',
 			]);
 			return view('livewire.auth.verify-email')->title('YNAB | Verify Email');

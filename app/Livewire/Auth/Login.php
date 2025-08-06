@@ -40,6 +40,17 @@
 				]);
 			}
 			
+			// Check if the user's email is verified
+			if(!Auth::user()->hasVerifiedEmail()){
+				// Log the user out to prevent access
+				Auth::logout();
+				
+				// Throw a validation exception with a custom message in English
+				throw ValidationException::withMessages([
+					'email' => ['Your email address is not verified. Please check your inbox to verify your email.'],
+				]);
+			}
+			
 			RateLimiter::clear($this->throttleKey());
 			Session::regenerate();
 			
